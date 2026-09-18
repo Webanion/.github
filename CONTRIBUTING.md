@@ -56,7 +56,7 @@ Coding assistants are fine to use here. What is not fine is a reviewer being una
 
 **Say which assistant you used, in the pull request body.** One line, the tool and the model, for example `AI assistance: Claude Code, Opus 5` or `AI assistance: none`. That is all. It changes nothing about how the change is reviewed, and it is not a confession: it tells whoever reads the diff what kind of mistakes to look for, which is a different set for generated code than for hand-written code. A pull request that does not say is assumed to have used one.
 
-**Nothing in a commit message credits an assistant.** No `Co-authored-by` trailer for a model, no generated-with footer, in commits or anywhere in the history. The declaration belongs in the pull request, where it is read once and kept with the discussion, rather than stamped on every commit forever. You are responsible for what you submit either way: a model wrote it, you are shipping it.
+**A `Co-authored-by` trailer naming the model is welcome on the commit.** Welcome rather than tolerated, because it puts the fact where the record lives. It does not replace the pull request line, since a trailer on one commit says nothing about the other six and the pull request body is what gets read before the diff. What does not belong in a commit message is a generated-with footer or any other tool advertisement, which is marketing rather than attribution. The repository owner's own commits carry no trailer, by preference on his own history, so do not read the existing log as contradicting this. You are responsible for what you submit either way: a model wrote it, you are shipping it.
 
 ## Pull requests
 
