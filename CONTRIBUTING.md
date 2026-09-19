@@ -86,6 +86,23 @@ If a change makes an existing document wrong, that document is fixed in the same
 
 The rule exists because the alternative has been tested. A runbook that describes a system as it was two months ago is worse than no runbook, since someone will follow it.
 
+## Images are versioned, never `latest`
+
+Every image this estate deploys carries an immutable version tag. Never `:latest`, never an untagged reference, and never a floating major like `:6` for anything we build.
+
+`latest` is not a version, it is a pointer that moves. The failures it causes are all quiet ones:
+
+- **Two nodes can run different code under the same name.** With `imagePullPolicy: IfNotPresent`, a node that already holds the tag keeps what it has while a node seeing it for the first time pulls whatever is newest. Nothing in the cluster reports the difference.
+- **There is nothing to roll back to.** A rollback names a version. "The one before latest" is not a thing that exists.
+- **Retention cannot protect it.** The registry keeps the most recently pushed tags per repository, and with `latest` there is only ever one, so there is no previous image to fall back to.
+- **A failed pull becomes permanent.** If the tag was never pushed, or was replaced, the pod has no way back. That is not hypothetical: one deployment in this estate sat in `ImagePullBackOff` for ninety-three days for exactly this reason, and the only reason it kept serving is that its running pod was never restarted.
+
+The version comes from the release: a merge bumps the package version, pushes the tag, and the deploy builds and deploys that exact string. `deploy/homelab/app.env` names the image, the production overlay names the tag, and nothing anywhere should name `latest`.
+
+Third-party images get pinned too. `postgres:17-alpine` is acceptable because the minor is pinned by the distribution tag; `unleash-server:6` is not, because a major tag moves under you. Prefer the fullest tag the publisher offers, and a digest where it matters.
+
+The one place `latest` legitimately appears is a local development compose file, which names images `<project>-<service>:latest` by default. Those never reach the cluster, and they should never be confused with something deployed.
+
 ## Scripts that change data
 
 Any script that writes, deletes, migrates or backfills reports by default and acts only when passed `--execute`.
