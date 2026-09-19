@@ -101,7 +101,7 @@ You own everything at the end: code, designs, infrastructure, accounts. NDAs wel
 
 Most of this organization is private by contract, which is normal for client platforms and is why the evidence lives on the site rather than in browsable code.
 
-* 📦 **[prebooked](https://github.com/Webanion/prebooked)** is the public one, an embeddable booking widget published on npm that turns any operator website into a booking channel with one embed line. It works from React and Next.js through WordPress, Elementor, Wix, Webflow, Squarespace, Shopify and plain HTML, and it is served by the Fully Booked platform behind it.
+* 📦 **[prebooked](https://github.com/webanion/prebooked)** is the public one, an embeddable booking widget published on npm that turns any operator website into a booking channel with one embed line. It works from React and Next.js through WordPress, Elementor, Wix, Webflow, Squarespace, Shopify and plain HTML, and it is served by the Fully Booked platform behind it.
 * 🌐 **[webanion.com](https://webanion.com)** is itself one of the products. Twenty content types in a Strapi headless CMS on PostgreSQL, a Next.js App Router frontend in five languages, and a companion MCP server that exposes the site's content to AI assistants as typed tools, with an allowlist projection layer deciding field by field what the public surface may return. It runs on the same self-administered k3s cluster as the client platform, with CI/CD that builds and rolls out on every merge.
 * 🚚 **[fully-booked.uk](https://fully-booked.uk)** is the longest-running proof: a customer booking site, a React Native operator app on both stores, an admin dashboard and one NestJS GraphQL backend serving every surface, shipping features weekly since 2023 without a rewrite.
 
